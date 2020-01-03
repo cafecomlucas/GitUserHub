@@ -65,3 +65,63 @@ Links com os detalhes de instalação das dependências, do emulador e erros com
 [https://docs.rocketseat.dev/ambiente-react-native/introducao](https://docs.rocketseat.dev/ambiente-react-native/introducao)
 
 ---
+
+## Criando projeto
+
+Para criar o projeto sem utilizar o Expo, utilizaremos o React Native CLI (Command Line Interface). O CLI está fora do pacote do React Native principal e é mantido pela comunidade no repositório [react-native-community/cli](https://github.com/react-native-community/cli).
+
+Podemos instalar esse pacote para uso global e criar um novo projeto:
+
+```
+yarn global add react-native-cli
+react-native init [nome_do_projeto]
+```
+
+Ou, a partir da versão 5 do NPM, podemos utilizar o CLI diretamente através do NPX:
+
+```
+npx react-native init [nome_do_projeto]
+```
+
+(No Mac é interessante ter o Cocoapods, que é um gerenciador de pacotes pro iOS utilizado pelo React Native)
+
+Projeto criado através do React Native CLI:
+
+```
+react-native init rocketseat_06_reactnative_github_api
+```
+
+Projeto inicializado pela primeira vez:
+
+```
+react-native run-android
+```
+
+No caso do Android o emulador precisa estar aberto antes do comando acima.
+
+Nessa primeira inicialização, que demora um pouco mais, o Metro Bundler gera o Bundle e faz a instalação no dispositivo. A partir da segunda vez (se o terminal do Metro Bundler for fechado, por exemplo) podemos executar o Bundle diretamente (sem precisar gerá-lo novamente) através do comando:
+
+```
+react-native start
+```
+
+No emulador/dispositivo, alguns comandos úteis:
+
+- Reload: R + R
+- Menu de desenvolvimento: Ctrl + D / Chacoalhar o dispositivo
+- Habilitar recarregamento automático: Dev Menu > Enable Fast Refresh
+
+Arquivo `App.js` editado (limpamos o que não será utilizado). As alterações foram exibidas no emulador/dispositivo.
+
+Comparando com o React Native com o React para Web:
+
+- Ainda declaramos componentes da mesma forma (com função ou com classe);
+- Para os elementos, não utilizamos tags HTML, mas sim os componentes do React Native. O componente `View` funciona como uma `<div>` e o componente `Text` funciona como qualquer tag de texto (`<p>`/`<span>`/etc);
+- Nenhum componente estrutural possui significado semântico, eles se diferenciam apenas pela estilização;
+- A estilização é definida tradicionalmente utilizando o framework Yoga, importando a classe StyleSheet do componente `react-native` e utilizando a mesma para criar objetos de estilização semelhante ao CSS;
+- Nos objetos do StyleSheet, são utilizados apenas objetos e as propriedades são no padrão camelCase (não utiliza-se traço "-");
+- No ambiente mobile, todos os elementos possuem o `display: flex` e o `flex-direction: column` por padrão;
+- Mesmo com a opção tradicional de estilização, ainda podemos utilizar o Styled Components para estilizar com a mesma sintaxe da Web;
+- No ambiente mobile teremos acesso a APIs nativas que não existem no ambiente Web (como verificação de conectividade, banco de dados do dispositivo, etc)
+
+---

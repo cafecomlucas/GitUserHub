@@ -353,3 +353,32 @@ Modificamos o componente `Routes`, passando um segundo parâmetro pro método `c
 Modificamos o componente `App` para estilizar a barra de status do topo (onde fica o relógio, a bateria, sinal de wi-fi, etc). Importamos o componente `StatusBar` do prórprio React Native, inserimos na estrutura e fizemos a estilização setando algumas propriedades para ele. Utilizamos a propriedade `barStyle` como `light-content` para que o conteúdo fique branco e a propriedade `backgroundColor` para setar a mesma cor de fundo do cabeçalho. Também é possível alterar outras propriedades como a `hidden`, que faz a barra de status desaparecer e a `translucent` que deixa a barra semi-transparente.
 
 ---
+
+## Instalando e utilizando Styled Components
+
+Adicionamos a biblioteca Styled Components. Ela serve para trabalhar com estilização nos componentes do React Native (ou ReactJS). Com essa biblioteca trabalhamos a estilização de maneira quase identica ao que fazemos no React para Web, com algumas diferenças.
+
+```
+yarn add styled-components
+```
+
+Para trabalhar em arquivos da Styled Components, também é necessário ter a extensão `vscode-styled-components` instalada no VSCode para que o highlighting funcione.
+
+No React Native, diferente da versão Web:
+
+- O Styled Components é importado de `styled-components/native` ao invés de apenas `styled-components`;
+- Não é possível definir uma estilização global, mas ainda é possível reaproveitar um componente estilizado (como um Container, por exemplo);
+- Não é possível encadear elementos, cada elemento deve ter uma estilização própria;
+- Não existem tags HTML (div, p, span, etc), apenas os componentes do React Native (`View`, `Text`, `Button`, etc);
+- Não existem classes ou ids e também não é possível estilizar pelo nome da tag;
+- Todos os componentes possuem display flex e flex-direction column por padrão.
+
+Utilizar essa biblioteca ainda é uma vantagem pois podemos estilizar como se fosse o CSS para Web (utilizando a sintaxe curta do padding, por exemplo).
+
+Criamos o arquivo `Main/styles.js`, definimos o flex 1 para ocupar todo o espaçamento vertical, um padding pro respiro do conteúdo e um background de teste.
+
+No arquivo `Main/index.js`, importamos o componente estilizado e colocamos ele na estrutura.
+
+Alterações exibidas no aplicativo.
+
+---

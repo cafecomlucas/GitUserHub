@@ -282,3 +282,53 @@ Caso o ESLint indique algum erro por não detectar que a variável `__DEV__` exi
 No componente App (`src/index.js`) fizemos a importação das configurações do Reactotron e colocamos um `console.tron.warn`.
 
 ---
+
+## Configurando a navegação com o React Navigation
+
+Semelhante ao que fizemos na versão Web, também será necessário configurar a navegação da aplicação. No React Native, contudo, algumas coisas são diferentes.
+
+### Instalando dependências
+
+É recomendável olhar a [documentação do React Navigation](https://reactnavigation.org/docs/pt-BR/getting-started.html) ao fazer a instalação dessa dependência em algum projeto, pois é o tipo de dependência que passa por atualizações constantes.
+
+Seguindo a documentação, instalamos a dependência no projeto:
+
+```
+yarn add react-navigation
+```
+
+Instalamos também as dependências complementares para um projeto React Native sem o Expo (com o Expo elas são diferentes):
+
+```
+yarn add react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context
+```
+
+Para concluir, no caso do Android, foi necessário alterar arquivos da linguagem nativa como o `android/app/build.gradle` e o `MainActivity.java`. No caso do iOS é necessário entrar na pasta ios e executar `pod install` e, para isso, é necessário ter o cocoapods, mencionado anteriormente.
+
+Quando fazemos modificações nativas, é necessário gerar a aplicação novamente (`react-navive run-android`) antes de continuar.
+
+Com a configuração das dependências iniciais de navegação concluída, escolhemos o tipo de navegação a ser utilizado.
+
+A navegação escolhida para esta parte da aplicação é do tipo [Stack](https://reactnavigation.org/docs/pt-BR/hello-react-navigation.html) (navegação em pilha), que é um tipo de navegação por botões. Para isso instalamos a dependência [React Navigation Stack](https://github.com/react-navigation/stack). Como essa dependência não precisa de modificações nativas para funcionar, não foi necessário gerar o Bundle novamente (com `react-native run-android`):
+
+```
+yarn add react-navigation-stack @react-native-community/masked-view
+```
+
+Além do tipo de navegação Stack, também existe a navegação por abas, por menu lateral, dentre outras.
+
+### Criando estrutura inicial
+
+Criamos os arquivos `src/pages/Main/index.js` e `src/pages/User/index.js`, que serão rotas diferentes da aplicação.
+
+Criamos o arquivo `routes.js`, onde importamos o método `createAppContainer` do React Navigation (`react-navigation`) para guardar toda a navegação, e o método `createStackNavigator` React Navigation Stack (`react-navigation-stack`) que é o tipo de navegação, além dos componentes de cada rota (`Main` e `User`).
+
+Qualquer tipo de navegação precisa do AppContainer.
+
+Setamos em uma constante `Routes` o resultado do método `createAppContainer`, e para ele, passamos como argumento o outro método `createStackNavigator`. No `createStackNavigator` definimos os componentes de rotas importados.
+
+Modificamos o arquivo principal `src/index.js` para importar o componente `Routes` logo após a importação das configurações do Reactotron (como uma boa prática - para que seja possível utilizar os logs do Reactotron nas rotas e em qualquer importação seguinte).
+
+Na aplicação foi possível ver um cabeçalho exibindo o nome do componente `Main` alinhado a esquerda.
+
+---

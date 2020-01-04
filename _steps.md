@@ -245,8 +245,40 @@ O comando acima também pode ser utilizado em outros casos de erro, quando não 
 
 Em último caso, quando o erro ainda não desaparece, ainda podemos encerrar o Metro Bundler e tentar gerar o Bundle novamente:
 
-```
+```bash
 react-native run-android
 ```
+
+---
+
+Criamos a pasta `src`. O arquivo `App.js` foi renomeado para `index.js` e movido para a pasta `src`.
+
+---
+
+## Debug no código com Reactotron
+
+Temos a opção de debugar o código nativamente utilizando o `console.log` após ativar o Debug no menu de desenvolvimento dentro do aplicativo instalado, assim conseguimos acessar o log em uma nova aba do navegador. Contudo, a melhor opção ao utilizar o React Native é um Debugger externo chamado Reactotron.
+
+Acessamos o GitHub do Reactotron, baixamos e instalamos.
+
+Também adicionamos a dependência Reactotron React Native ao projeto. Foi necessário adicionar como dependência normal pra o ESLint não indicar erros e configuramos a seguir para o Reactotron só executar em ambiente de desenvolvimento.
+
+```bash
+yarn add reactotron-react-native
+```
+
+Na pasta `src` criamos o arquivo `config/ReactotronConfig.js` e nele importamos o módulo instalado, verificamos se a aplicação está rodando em ambiente de desenvolvimento (checando a variável global do node chamada `__DEV__`), inicializamos o Reactotron em caso positivo e armazenamos o objeto retornado por ele dentro da variável global `console` (em `console.tron`) para ter acesso em outros lugares da aplicação. Também efetuamos a limpeza do log (`tron.clear()`).
+
+Quando conectamos via Wifi/USB, se essa configuração não for o suficiente, também pode ser necessário indicar qual o host dentro do método `configure`. Se mesmo assim não funcionar, também pode ser necessário configurar um redirecionamento de porta:
+
+```bash
+adb reverse tcp:9090 tcp:9090
+```
+
+(Para o comano acima funcionar a pasta do SDK do Android precisa estar configurada nas variáveis de ambiente)
+
+Caso o ESLint indique algum erro por não detectar que a variável `__DEV__` existe, basta incluí-la na configuração `.eslintrc.js` na propriadade `globals` como `__DEV__: 'readonly'`.
+
+No componente App (`src/index.js`) fizemos a importação das configurações do Reactotron e colocamos um `console.tron.warn`.
 
 ---

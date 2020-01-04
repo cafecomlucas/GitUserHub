@@ -332,3 +332,18 @@ Modificamos o arquivo principal `src/index.js` para importar o componente `Route
 Na aplicação foi possível ver um cabeçalho exibindo o nome do componente `Main` alinhado a esquerda.
 
 ---
+
+## Main | Definindo título
+
+Modificamos o componente `Main`, adicionando uma propriedade chamada `navigationOptions` e dentro dela criamos um objeto com a propriedade `title` e o valor `Usuários`. A propriedade `navigationOptions` é lida pelo `React Navigation` faz a alteração no título.
+
+## Routes | Estilizando o padrão do cabeçalho
+
+Modificamos o componente `Routes`, passando um segundo parâmetro pro método `createStackNavigator` com algumas opções de estilização. Setamos alguns itens dentro da propriedade `defaultNavigationOptions`, que são as propriedades padrão/herdadas para todas as telas:
+
+- `headerBackTitleVisible:false`: para, ao navegar para uma página, quando o botão de voltar aparecer no topo, não exibir o texto (para iOS);
+- `headerTitleAlign:center`: para alinhar o título ao centro (para Android);
+- `headerStyle`: para definir a cor de todo o cabeçalho;
+- `headerTintColor`: para definir a cor de todos os textos dentro do cabeçalho (inclusive o título).
+
+---

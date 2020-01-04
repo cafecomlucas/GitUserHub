@@ -382,3 +382,25 @@ No arquivo `Main/index.js`, importamos o componente estilizado e colocamos ele n
 Alterações exibidas no aplicativo.
 
 ---
+
+## Main | Criando elementos e estilizando formulário
+
+No React Native, selhante ao React para Web, também podemos utilizar pacotes de fontes como: Font Awesome, Material Icons, Ionicons, dentre outros. Para utilizar instalamos a dependência React Native Vector Icons.
+
+```
+yarn add react-native-vector-icons
+```
+
+Para concluir a instalação, também foi necessário alterar o código nativo de cada plataforma. Seguindo a documentação, para [Android](https://github.com/oblador/react-native-vector-icons#android) adicionamos algumas linhas ao `android/app/build.gradle`. Para [iOS](https://github.com/oblador/react-native-vector-icons#ios) é necessário adicionar os pacotes de fontes que utilizaremos no `Info.plist`, acessar a pasta ios e executar `pod install` (do CocoaPods). Em ambos os casos, incluimos apenas o Material Icons, que é apenas o pacote que será utilizado, deixando assim, o Bundle mais leve.
+
+Como alteramos código nativo, foi necessário executar `react-native run-android` novamente.
+
+Editamos o arquivo `Main/styles.js`, exportando o `Form`(View), o `Input`(TextInput) e o `SubmitButton`(RectButton). No campo de texto, editamos a propriedade de cor do placeholder no próprio arquivo de estilização (recomendável). O Botão foi importado da biblioteca `react-native-gesture-handler` e possui uma estilização automatica diferente dependendo da plataforma (iOS ou Android), como por exemplo, o feedback visual ao tocar nele (no Adroid costuma ocorrer o 'ripple effect', diferente do iOS, que só altera a opacidade). O Styled Components permite utliziarmos componentes que não são nativos (como o ReactButton) passando eles como parâmetro pro método `styled()`.
+
+Editamos a estrutura no arquivo `Main/index.js`. O `Form` guarda o `Input` e o `Button`. No `Input`, algumas propriedades de acessibilidade padrão foram editadas (como o [autoCorrect](https://facebook.github.io/react-native/docs/textinput#autocorrect) e o [autoCapitalize](https://facebook.github.io/react-native/docs/textinput#autocapitalize)) para que não funcionem, pois não fazem sentido no contexto dessa aplicação.
+
+Para utilizar o ícone do pacote de ícones configurado anteriormente, ainda no arquivo `Main/index.js`, importamos o componente `Icon` do `react-native-vector-icons/MaterialIcons` e incluímos ele na estrutura. Nas propriedades do componente, definimos o `name` após ver os [nomes disponíveis na documentação](https://oblador.github.io/react-native-vector-icons/), além do tamanho e da cor.
+
+Alterações exibidas no aplicativo.
+
+---

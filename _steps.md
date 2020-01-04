@@ -347,3 +347,9 @@ Modificamos o componente `Routes`, passando um segundo parâmetro pro método `c
 - `headerTintColor`: para definir a cor de todos os textos dentro do cabeçalho (inclusive o título).
 
 ---
+
+## App | Estilizando a barra de status do topo
+
+Modificamos o componente `App` para estilizar a barra de status do topo (onde fica o relógio, a bateria, sinal de wi-fi, etc). Importamos o componente `StatusBar` do prórprio React Native, inserimos na estrutura e fizemos a estilização setando algumas propriedades para ele. Utilizamos a propriedade `barStyle` como `light-content` para que o conteúdo fique branco e a propriedade `backgroundColor` para setar a mesma cor de fundo do cabeçalho. Também é possível alterar outras propriedades como a `hidden`, que faz a barra de status desaparecer e a `translucent` que deixa a barra semi-transparente.
+
+---

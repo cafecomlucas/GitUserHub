@@ -409,9 +409,9 @@ Alterações exibidas no aplicativo.
 
 Para trabalhar com os dados do estado modificamos o componente `Main` para ser um componente de classe.
 
-Criamos o método `handleInputChange`, responsável por guardar a informação que o usuário digita na propriedade `newUser`. Associamos o método ao componente `InputText` através da propriedade `onChangeText` (ao invés do `onChange`, e que recebe o valor diretamente como argumento ao invés do `event`). No campo `InputText` também definimos que o valor do campo é igual ao valor armazenado no estado (para refletir a alteração quando limparmos essa propriedade após adicionar o item na lista). 
+Criamos o método `handleInputChange`, responsável por guardar a informação que o usuário digita na propriedade `newUser`. Associamos o método ao componente `InputText` através da propriedade `onChangeText` (ao invés do `onChange`, e que recebe o valor diretamente como argumento ao invés do `event`). No campo `InputText` também definimos que o valor do campo é igual ao valor armazenado no estado (para refletir a alteração quando limparmos essa propriedade após adicionar o item na lista).
 
-Criamos o método `handleSubmit`, responsável por buscar a informação de `newUser` no estado, buscar também a informação da lista `users`, unir as duas em uma lista só, atualizar o estado e limpar a propriedade `newUser` (que ao ser limpa reflete a alteração no componente `InputText`). 
+Criamos o método `handleSubmit`, responsável por buscar o dado de `newUser` no estado, buscar também os dados da lista `users`, unir os dados em um único Array, setar o novo com esse novo Array (conceito de imutabilidade) estado e limpar a propriedade `newUser` (que ao ser limpa reflete a alteração no componente `InputText`).
 
 Também importamos a API do teclado do `react-native` e utilizamos o método `Keyboard.dismiss()` no final do `handleSubmit` pro teclado desaparecer logo após o envio.
 
@@ -420,5 +420,21 @@ Por enquanto a lista `users` guarda apenas strings, e será modificada para guar
 Diferente da versão Web, associamos o `handleSubmit` diretamente ao botão de envio (evento `onPress`) e ao campo de texto (evento `onSubmitEditing`), já que não existe realmente um elemento `form`. No campo de texto, também adicionamos a propriedade `returnKeyType="send"` pra seta de enviar aparecer no teclado.
 
 Utilizando o Reactotron verificamos as alterações no estado da aplicação.
+
+---
+
+## Main | Instalando Axios e preenchendo propriedade do estado com dados da API
+
+Para buscar informações em uma API REST externa, poderíamos utilizar o `fetch` do próprio JavaScript, contudo, vamos utilizar uma biblioteca chamada `axios` para poder configurar algumas opções (como a URL base). Além disso, reaproveitamos uma mesma biblioteca que pode ser utilizada no ambiente Web.
+
+```
+yarn add axios
+```
+
+Consultamos na documentação do GitHub como acessar o recurso de busca de um usuário através do método GET [https://developer.github.com/v3/users/#get-a-single-user](https://developer.github.com/v3/users/#get-a-single-user).
+
+No componente `Main` importamos o arquivo `api` para fazer uma requisição GET quando o método `handleSubmit` é executado. Como a requisição é assíncrona, adicionamos async/await ao método. Após o retorno de todos os dados, criamos um novo objeto para guardar os dados `name`, `login`, `bio` e `avatar` em um novo objeto (`user`) e adicionamos ele na lista de objetos (`users`).
+
+Ao testar e fazer a requisição pra API, na timeline do Reactotron aparece a resposta com os dados do usuário, além dos cabeçalhos da requisição/resposta. O Reactotron detecta automaticamente as requisições pra API (não sendo necessário executar um tron.log).
 
 ---

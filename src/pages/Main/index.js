@@ -5,6 +5,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {Container, Form, Input, SubmitButton} from './styles';
 
+import api from '../../services/api';
+
 export default class Main extends Component {
   state = {
     newUser: '',
@@ -13,19 +15,28 @@ export default class Main extends Component {
 
   handleInputChange = newUser => {
     this.setState({newUser});
-    console.tron.log(newUser);
+    // console.tron.log(newUser);
   };
 
-  handleSubmit = () => {
+  handleSubmit = async () => {
     const {users: oldUsers, newUser} = this.state;
 
-    const users = [newUser, ...oldUsers];
+    const {data} = await api.get(`/users/${newUser}`);
+
+    const user = {
+      name: data.name,
+      login: data.login,
+      bio: data.bio,
+      avatar: data.avatar_url,
+    };
+
+    const users = [user, ...oldUsers];
+    console.tron.log(users);
 
     this.setState({
       users,
       newUser: '',
     });
-    console.tron.log(users);
     Keyboard.dismiss();
   };
 

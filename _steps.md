@@ -467,3 +467,23 @@ De dentro do `Main/styles.js` também estilizamos e exportamos:
 Em `Main/index.js` importamos os componentes estilizados. No método `renderItem`, através da desestruturação, acessamos a propriedade `item` que corresponde a cada usuário. Criamos estrutura com os componentes importados e os dados de cada usuário.
 
 ---
+
+## Main | Salvando lista de usuários localmente utilizando AsyncStorage
+
+Para guardar a lista de usuários localmente utilizamos a API AsyncStorage do `@react-native-community/async-storage` (diferente do browser, o ambiente mobile não possui essa API). Guardando os dados localmente não perdemos eles ao recarregar ou sair da aplicação.
+
+```
+yarn add @react-native-community/async-storage
+```
+
+(Para iOS, ainda é necessário executar um `pod install` na pasta ios e gerar o Bundle novamente)
+
+Após instalação, importamos a API em `Main/index.js`.
+
+Setamos os métodos do ciclo de vida do React para resgatar ou gravar os dados localmente. Utilizamos o método `componentDidUpdate` (quanto um item é adicionado) para guardar o estado da aplicação na lista local e utilizamos o `componentDidMount` (quando a aplicação é iniciada/recarregada) para resgatar os dados da lista local e atualizar o estado da aplicação.
+
+No caso do `componentDidUpdate` não foi necessário adicionar o async/await antes do `AsyncStorage`, pois não existe nenhum código após a execução que dependa do resultado.
+
+Não existe limite de armazenamento e só depende de quanto espaço o usuário tem disponível no dispositivo.
+
+---

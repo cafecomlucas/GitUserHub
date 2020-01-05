@@ -22,6 +22,7 @@ export const Input = styled.TextInput.attrs({
   border-radius: 4px;
   padding: 0 15px;
   border: 1px solid #c7c7c7;
+  opacity: ${props => (props.loading ? 0.8 : 1)};
 `;
 
 export const SubmitButton = styled(RectButton)`
@@ -31,4 +32,5 @@ export const SubmitButton = styled(RectButton)`
   padding: 0 12px;
   border-radius: 4px;
   margin-left: 10px;
+  opacity: ${props => (props.loading ? 0.4 : 1)};
 `;

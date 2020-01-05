@@ -438,3 +438,15 @@ No componente `Main` importamos o arquivo `api` para fazer uma requisição GET 
 Ao testar e fazer a requisição pra API, na timeline do Reactotron aparece a resposta com os dados do usuário, além dos cabeçalhos da requisição/resposta. O Reactotron detecta automaticamente as requisições pra API (não sendo necessário executar um tron.log).
 
 ---
+
+## Main | Bloqueia/Anima botão até a conclusão da chamada a API
+
+Para que o usuário não envie o dado do campo de texto várias vezes seguidas foi necessário desabilitar o campo de texto e o botão de envio temporáriamente.
+
+Adicionamos a propriedade `loading` ao estado, setamos ela como `true` antes de fazer a requisição a API e depois da requisição setamos como `false`. Nos componentes `Input` e `SubmitButton` passamos o dado `loading` na propriedade `loading` e no Styled Component (dentro de `Main/styles.js`) deixamos o campo e o botão transparentes de acordo com o valor da propriedade `loading` (`false` ou `true`).
+
+Para alterar o desenho do botão enquanto os dados da API são carregados, importamos o componente `ActivityIndicator` do `react-native`, que retorna um ícone de carregamento já animado e estilizado de acordo com o sistema (Android ou iOS). Utilizamos um _condicional rendering_ através da propriedade `loading` do estado: caso o dado seja `true` só o `ActivityIndicator` aparece, caso o dado seja `false` só o `Icon` aparece.
+
+No Reactotron os testes indicam que apenas uma busca na API é feita por vez e não é possível fazer uma nova requisição até receber o retorno da antiga.
+
+---

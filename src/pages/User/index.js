@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {View} from 'react-native';
 import api from '../../services/api';
 
-// import { Container } from './styles';
+import {Container, Header, Avatar, Name, Bio} from './styles';
 
 export default class User extends Component {
   static navigationOptions = ({navigation}) => ({
@@ -17,6 +17,17 @@ export default class User extends Component {
   }
 
   render() {
-    return <View />;
+    const {navigation} = this.props;
+    const user = navigation.getParam('user');
+
+    return (
+      <Container>
+        <Header>
+          <Avatar source={{uri: user.avatar}}></Avatar>
+          <Name>{user.name}</Name>
+          <Bio>{user.bio}</Bio>
+        </Header>
+      </Container>
+    );
   }
 }

@@ -531,3 +531,9 @@ Como a rota `User` exibirá mais dados, foi necessário transformar o componente
 Utilizamos o método do ciclo de vida `componentDidMount` (com async) para fazer a chamada pra API do GitHub assim que o usuário entra na página. A chamada pra API foi feita para buscar os [favoritos](https://developer.github.com/v3/activity/starring/#list-repositories-being-starred) do usuário. A resposta foi exibida no Reactotron.
 
 ---
+
+## User | Exibindo dados do Usuário com base no parâmetro recebido
+
+Criamos o arquivo `User/styles.js` com a estilização do cabeçalho da página `User` e importamos os componentes estilizados em `User/index.js`. Buscamos os dados do usuário armazenados no parâmetro e exibimos na renderização.
+
+---

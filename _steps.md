@@ -450,3 +450,20 @@ Para alterar o desenho do botão enquanto os dados da API são carregados, impor
 No Reactotron os testes indicam que apenas uma busca na API é feita por vez e não é possível fazer uma nova requisição até receber o retorno da antiga.
 
 ---
+
+## Main | Listando repositórios
+
+Para listar os usuários adicionados, utilizamos um componente do próprio React Native feito para percorrer listas chamado `FlatList` (ao invés de ul/li com o map utilizado no React para Web). Em `Main/styles.js` estilizamos o `FlatList` (com a propriedade [showsVerticalScrollIndicator](https://facebook.github.io/react-native/docs/scrollview#showsverticalscrollindicator) [extendida do componente scrollview] setada pra `false` para não exibir o scroll) e exportamos como o Styled Component `List`. Em `Main/index.js`, após importá-lo definimos as propriedades `data` com o Array de usuários, o `keyExtractor` com o valor único pra cada item da lista e o `renderItem` que é a função utilizada para renderizar cada item.
+
+De dentro do `Main/styles.js` também estilizamos e exportamos:
+
+- `User`(View): serve como container para todos os dados;
+- `Avatar`(Image): mostra a imagem do usuário definida no objeto {uri:<caminho-da-imagem>};
+- `Name`(Text): mostra o nome do usuário;
+- `Bio`(Text): mostra a descrição do usuário, limitado a 2 linhas através da propriedade `numberOfLines`;
+- `ProfileButton`(RectButton): mostra o botão de acesso aos detalhes do usuário(por enquanto está fake);
+- `ProfileButtonText`(Text): mostra o texto do botão.
+
+Em `Main/index.js` importamos os componentes estilizados. No método `renderItem`, através da desestruturação, acessamos a propriedade `item` que corresponde a cada usuário. Criamos estrutura com os componentes importados e os dados de cada usuário.
+
+---

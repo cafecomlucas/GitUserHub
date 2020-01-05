@@ -3,7 +3,19 @@ import {Keyboard, ActivityIndicator} from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import {Container, Form, Input, SubmitButton} from './styles';
+import {
+  Container,
+  Form,
+  Input,
+  SubmitButton,
+  List,
+  User,
+  Avatar,
+  Name,
+  Bio,
+  ProfileButton,
+  ProfileButtonText,
+} from './styles';
 
 import api from '../../services/api';
 
@@ -48,7 +60,7 @@ export default class Main extends Component {
   };
 
   render() {
-    const {newUser, loading} = this.state;
+    const {newUser, users, loading} = this.state;
 
     return (
       <Container>
@@ -72,6 +84,20 @@ export default class Main extends Component {
             )}
           </SubmitButton>
         </Form>
+        <List
+          data={users}
+          keyExtractor={user => user.login}
+          renderItem={({item}) => (
+            <User>
+              <Avatar source={{uri: item.avatar}} />
+              <Name>{item.name}</Name>
+              <Bio>{item.bio}</Bio>
+              <ProfileButton>
+                <ProfileButtonText>Ver perfil</ProfileButtonText>
+              </ProfileButton>
+            </User>
+          )}
+        />
       </Container>
     );
   }

@@ -404,3 +404,21 @@ Para utilizar o ícone do pacote de ícones configurado anteriormente, ainda no 
 Alterações exibidas no aplicativo.
 
 ---
+
+## Main | Adicionando usuário e lista de usuários no estado da aplicação
+
+Para trabalhar com os dados do estado modificamos o componente `Main` para ser um componente de classe.
+
+Criamos o método `handleInputChange`, responsável por guardar a informação que o usuário digita na propriedade `newUser`. Associamos o método ao componente `InputText` através da propriedade `onChangeText` (ao invés do `onChange`, e que recebe o valor diretamente como argumento ao invés do `event`). No campo `InputText` também definimos que o valor do campo é igual ao valor armazenado no estado (para refletir a alteração quando limparmos essa propriedade após adicionar o item na lista). 
+
+Criamos o método `handleSubmit`, responsável por buscar a informação de `newUser` no estado, buscar também a informação da lista `users`, unir as duas em uma lista só, atualizar o estado e limpar a propriedade `newUser` (que ao ser limpa reflete a alteração no componente `InputText`). 
+
+Também importamos a API do teclado do `react-native` e utilizamos o método `Keyboard.dismiss()` no final do `handleSubmit` pro teclado desaparecer logo após o envio.
+
+Por enquanto a lista `users` guarda apenas strings, e será modificada para guardar as informações que virão da API do GitHub.
+
+Diferente da versão Web, associamos o `handleSubmit` diretamente ao botão de envio (evento `onPress`) e ao campo de texto (evento `onSubmitEditing`), já que não existe realmente um elemento `form`. No campo de texto, também adicionamos a propriedade `returnKeyType="send"` pra seta de enviar aparecer no teclado.
+
+Utilizando o Reactotron verificamos as alterações no estado da aplicação.
+
+---

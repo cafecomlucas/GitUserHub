@@ -497,3 +497,23 @@ No componente Main, criamos o método `handleNavigate`, que faz a chamada ao mé
 No componente User, utilizamos o método `props.navigation.getParam` para buscar os dados do parâmetro `user` (informado na rota anterior) e exibimos o resultado no console do Reactotron.
 
 ---
+
+## Validação das propriedades do componente Main com o módulo prop-types
+
+É necessário validar todas as propriedades de um componente (mesmo aquelas preenchidas de maneira automática). No componente Main, precisamos validar a proprieade `navigation` (que é preenchida automaticamente pelo React Navigation).
+
+Para fazer a validação, instalamos o módulo prop-types:
+
+```
+yarn add prop-types
+```
+
+No componente Repository importamos o prop-types, criamos a variável estática propTypes dentro da classe e realizamos as devidas validações na propriedade navigation do componente.
+
+Apesar do objeto `navigation` possuir outras propriedades/métodos dentro dele, validamos apenas o método `navigation.navigate`, pois o único item que utililizamos. Não é necessário validar propriedades não utilizadas.
+
+---
+
+Aproveitamos para mover a declaração de `navigationOptions` para dentro da classe `Main`.
+
+---

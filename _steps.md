@@ -487,3 +487,13 @@ No caso do `componentDidUpdate` não foi necessário adicionar o async/await ant
 Não existe limite de armazenamento e só depende de quanto espaço o usuário tem disponível no dispositivo.
 
 ---
+
+## Main | Configurando link para página Usuário passando parâmetros
+
+Para criar criar um link que vai para outra página é preciso utilizar o JavaScript mesmo pois não existe um componente específico pra isso no ambiente mobile (como existe o `Link` no ambiente Web). O React Stack Navigation preenche automaticamente a propriedade `navigation` com o método `navigate` em cada um dos componentes adicionados na chamada da função `createStackNavigator` (arquivo `src/routes.js`), o que permite criar esse link.
+
+No componente Main, criamos o método `handleNavigate`, que faz a chamada ao método `props.navigation.navigate`, passando uma string com o nome da rota (`User`) e os parâmetros dentro de um objeto (informamos os dados do usuário). No `ProfileButton` associamos o método `handleNavigate` ao evento `onPress` com os dados do usuário no argumento.
+
+No componente User, utilizamos o método `props.navigation.getParam` para buscar os dados do parâmetro `user` (informado na rota anterior) e exibimos o resultado no console do Reactotron.
+
+---

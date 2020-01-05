@@ -517,3 +517,17 @@ Apesar do objeto `navigation` possuir outras propriedades/métodos dentro dele, 
 Aproveitamos para mover a declaração de `navigationOptions` para dentro da classe `Main`.
 
 ---
+
+## User | Alterando título com base no parâmetro
+
+No início da classe declaramos a propriedade estática `navigationOptions` para definir o título da página. Contudo, por ser uma propriedade estática, não temos acesso ao `this`, então não é possível setar o objeto diretamente. Foi necessário setar uma função que retorna um objeto. Essa função é preenchida com informações no argumento, utilizamos desestruturação para acessar a propriedade `navigation`, chamar o método `navigation.getParam` para buscar o usuário informado pela rota anterior e retornar o objeto (`{title: <userName>}`).
+
+---
+
+## User | Buscando dados na API do GitHub com base no parâmetro
+
+Como a rota `User` exibirá mais dados, foi necessário transformar o componente de função em um componente de classe para utilização do estado.
+
+Utilizamos o método do ciclo de vida `componentDidMount` (com async) para fazer a chamada pra API do GitHub assim que o usuário entra na página. A chamada pra API foi feita para buscar os [favoritos](https://developer.github.com/v3/activity/starring/#list-repositories-being-starred) do usuário. A resposta foi exibida no Reactotron.
+
+---

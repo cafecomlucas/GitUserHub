@@ -565,3 +565,17 @@ Descrição atualizada com as funcionalidades da primeira versão, as funcionali
 Criamos o Styled Component Loading para ser exibido enquanto os dados da API não chegam. No componente User importamos e verificamos se a propriedade loading do estado é true antes de exibir o componente estilizado Loading.
 
 ---
+
+## User | Carregando página seguinte através do Scroll infinito
+
+Propriedade do estado `page` criada para guardar o número da página atual.
+
+Propriedade do estado `endOfPages` criada para guardar o status da existencia de páginas disponíveis e evitar buscas desnecessárias.
+
+O componente `Stars` foi modificado para chamar o método `loadMore` quando a lista estiver a 20% do final (propriedades `onEndReached` e `onEndReachedThreshold`) adicionadas.
+
+O método `loadMore` foi criado semelhante ao `componentDidMount`, com a diferença da verificação se o `endOfPages` é verdadeiro antes de continuar, do incremento na página atual `newPage` e da verificação se ainda existem mais páginas (retorno com Array vazio).
+
+Os componentes estilizados foram atualizados para que a página não "quebre" ao carregar. O componente `Loading` foi removido e o componente estilizado `StarsTitleContainer` foi adicionado, servindo tanto para guardar o título, quanto para exibir o ícone de carregamento centralizado. Também foi adicionada uma opacidade ao componente estilizado `Stars` enquanto uma nova página está sendo requisitada.
+
+---

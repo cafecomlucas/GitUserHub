@@ -33,7 +33,7 @@ Até o commit [fb3e91...](https://github.com/cafecomlucas/rocketseat_desafio_06_
 
 ---
 
-## Funcionalidades adicionais (versão do desafio)
+### Funcionalidades adicionais (versão do desafio)
 
 Após o commit [fb3e91...](https://github.com/cafecomlucas/rocketseat_desafio_06_reactnative_github_api/commit/fb3e912cc45f2678d5966b13e912733e6515aa28) as seguintes funcionalidades foram adicionadas:
 

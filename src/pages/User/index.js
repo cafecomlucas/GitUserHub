@@ -9,6 +9,7 @@ import {
   Avatar,
   Name,
   Bio,
+  StarsTitleContainer,
   StarsTitle,
   Stars,
   Starred,
@@ -16,7 +17,6 @@ import {
   Info,
   Title,
   Author,
-  Loading,
 } from './styles';
 
 export default class User extends Component {
@@ -33,19 +33,53 @@ export default class User extends Component {
   state = {
     stars: [],
     loading: false,
+    page: 1,
+    endOfPages: false,
   };
 
   async componentDidMount() {
-    const {loading} = this.state;
+    const {loading, page} = this.state;
     const {navigation} = this.props;
     const user = navigation.getParam('user');
 
     if (loading) return;
 
     this.setState({loading: true});
-    const {data} = await api.get(`/users/${user.login}/starred`);
+    const {data} = await api.get(`/users/${user.login}/starred`, {
+      params: {
+        per_page: 5,
+        page,
+      },
+    });
     this.setState({stars: data, loading: false});
   }
+
+  loadMore = async () => {
+    const {loading, stars, page, endOfPages} = this.state;
+    const {navigation} = this.props;
+    const user = navigation.getParam('user');
+
+    if (loading || endOfPages) return;
+
+    const newPage = page + 1;
+
+    this.setState({loading: true});
+    const {data} = await api.get(`/users/${user.login}/starred`, {
+      params: {
+        per_page: 5,
+        page: newPage,
+      },
+    });
+    this.setState({loading: false});
+    if (!data.length) {
+      this.setState({endOfPages: true});
+    } else {
+      this.setState({
+        stars: [...stars, ...data],
+        page: newPage,
+      });
+    }
+  };
 
   render() {
     const {navigation} = this.props;
@@ -60,14 +94,21 @@ export default class User extends Component {
           <Bio>{user.bio}</Bio>
         </Header>
         {loading && (
-          <Loading>
-            <ActivityIndicator size={30} color="#777" />
-          </Loading>
+          <StarsTitleContainer>
+            <ActivityIndicator size={20} color="#777" />
+          </StarsTitleContainer>
         )}
-        {!!stars.length && <StarsTitle>Stars</StarsTitle>}
+        {!!stars.length && !loading && (
+          <StarsTitleContainer>
+            <StarsTitle>Stars</StarsTitle>
+          </StarsTitleContainer>
+        )}
         <Stars
           data={stars}
+          loading={loading}
           keyExtractor={star => String(star.id)}
+          onEndReachedThreshold={0.2}
+          onEndReached={this.loadMore}
           renderItem={({item}) => (
             <Starred>
               <OwnerAvatar source={{uri: item.owner.avatar_url}} />

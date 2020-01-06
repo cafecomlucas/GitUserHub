@@ -35,13 +35,19 @@ export const Bio = styled.Text`
   color: #777;
 `;
 
-export const StarsTitle = styled.Text`
+export const StarsTitleContainer = styled.View`
   padding: 10px 0;
+  justify-content: center;
+  align-items: center;
+  border-bottom-width: 1px;
+  border-color: #ccc;
+  min-height: 50px;
+`;
+
+export const StarsTitle = styled.Text`
   text-align: center;
   font-size: 16px;
   color: #777;
-  border-bottom-width: 1px;
-  border-color: #ccc;
   font-weight: bold;
   text-transform: uppercase;
 `;
@@ -50,6 +56,7 @@ export const Stars = styled.FlatList.attrs({
   showsVerticalScrollIndicator: false,
 })`
   padding: 0 20px;
+  opacity: ${props => (props.loading ? 0.5 : 1)};
 `;
 
 export const Starred = styled.View`
@@ -84,8 +91,4 @@ export const Title = styled.Text.attrs({
 export const Author = styled.Text`
   color: #666;
   font-size: 12px;
-`;
-
-export const Loading = styled.View`
-  padding: 10px;
 `;

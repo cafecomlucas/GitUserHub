@@ -102,6 +102,11 @@ export default class User extends Component {
     this.setState({stars: data, loading: false, page});
   };
 
+  handleNavigate = ({name, html_url}) => {
+    const {navigation} = this.props;
+    navigation.navigate('Star', {name, html_url});
+  };
+
   render() {
     const {navigation} = this.props;
     const user = navigation.getParam('user');
@@ -133,7 +138,7 @@ export default class User extends Component {
           onEndReachedThreshold={0.2}
           onEndReached={this.loadMore}
           renderItem={({item}) => (
-            <Starred>
+            <Starred onPress={() => this.handleNavigate(item)}>
               <OwnerAvatar source={{uri: item.owner.avatar_url}} />
               <Info>
                 <Title>{item.name}</Title>

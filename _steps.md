@@ -580,7 +580,7 @@ Os componentes estilizados foram atualizados para que a página não "quebre" ao
 
 ---
 
-## User | Atualização da lista com reset
+## User | Atualização da lista com reset da página e da quantidade de itens
 
 Propriedade do estado `refresh` criada para guardar o status de recarregamento.
 
@@ -588,6 +588,24 @@ No componente `Stars` foi adicionada a propriedade `refreshing` com a referênci
 
 O método `refreshList` foi criado para buscar informações na API do GitHub passando como parâmetro a propriedade `page` com o valor 1. Quando a resposta é retornada, toda a lista é substituída no estado da aplicação (propriedade `stars`).
 
+---
 
+## User/Star | Exibição da página de repositórios favoritos dentro da aplicação
+
+Para exibir uma página web dentro da aplicação é necessário ter a biblioteca [WebView](https://github.com/react-native-community/react-native-webview) do React Native Community. Que foi instalada seguindo as [instruções da documentação](https://github.com/react-native-community/react-native-webview/blob/master/docs/Getting-Started.md).
+
+```
+yarn add react-native-webview
+```
+
+(Para iOS também é necessário executar `pod install` na pasta ios)
+
+A nova pagina foi definida no novo componente `Star`, onde importamos o componente `WebView` e utilizamos as informações dos parâmetros para preencher o endereço Web (propriedade `source`) no componente `WebView` e o título no cabeçalho (`title`). Também foi necessário setar uma largura fixa para títulos muito grandes não ficarem por cima do botão de voltar.
+
+Em `src/routes.js`, importamos e adicionamos o componente `Star` ao método `createStackNavigator`.
+
+Em `User/styles.js`, alteramos o componente estilizado `Starred` para exportar um botão (`RectButton`) ao invés de uma View para que seja possível navegar para outra rota ao pressioná-lo.
+
+Em `User/index.js`, alteramos o componente `Starred` para executar o método `handleNavigate` passando o usuário atual no parâmetro. O método `handleNavigate` foi criado/definido para chamar a rota `Star`, passando a propriedade `name` (nome do repositório favorito) e a `html_url` (endereço web) via parâmetros.
 
 ---

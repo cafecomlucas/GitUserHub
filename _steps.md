@@ -544,9 +544,6 @@ Componente `User` modificado para exibir dados retornados pela API: os favoritos
 
 ---
 
-
----
-
 ## Validação das propriedades do componente User com o módulo prop-types
 
 É necessário validar todas as propriedades de um componente (mesmo aquelas preenchidas de maneira automática). No componente User, precisamos validar a proprieade `navigation` (que é preenchida automaticamente pelo React Navigation).
@@ -554,6 +551,12 @@ Componente `User` modificado para exibir dados retornados pela API: os favoritos
 No componente User importamos o prop-types, criamos a variável estática propTypes dentro da classe e realizamos as devidas validações na propriedade navigation do componente.
 
 Apesar do objeto `navigation` possuir outras propriedades/métodos dentro dele, validamos apenas o método `navigation.getParam`, pois o é único item que utililizamos no componente `User`. Não é necessário validar propriedades não utilizadas.
+
+---
+
+## Atualização na descrição
+
+Descrição atualizada com as funcionalidades da primeira versão, as funcionalidades posteriores e instruções de como iniciar o projeto. 
 
 ---
 

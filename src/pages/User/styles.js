@@ -7,22 +7,21 @@ export const Container = styled.View`
 
 export const Header = styled.View`
   align-items: center;
-  padding-bottom: 20px;
-  margin: 0 10px 20px 10px;
+  padding: 0 10px 20px 10px;
   border-bottom-width: 1px;
   border-color: #c7c7c7;
 `;
 
 export const Avatar = styled.Image`
   background: #eee;
-  width: 100px;
-  height: 100px;
-  border-radius: 50px; /** porcentagem não funciona */
+  width: 90px;
+  height: 90px;
+  border-radius: 45px; /** porcentagem não funciona */
 `;
 
 export const Name = styled.Text`
   margin-top: 7px;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
   text-align: center;
   color: #333;
@@ -31,7 +30,58 @@ export const Name = styled.Text`
 export const Bio = styled.Text`
   padding-top: 7px;
   text-align: center;
-  font-size: 16px;
-  line-height: 19px;
+  font-size: 14px;
+  line-height: 17px;
   color: #777;
+`;
+
+export const StarsTitle = styled.Text`
+  padding: 10px 0;
+  text-align: center;
+  font-size: 16px;
+  color: #777;
+  border-bottom-width: 1px;
+  border-color: #ccc;
+  font-weight: bold;
+  text-transform: uppercase;
+`;
+
+export const Stars = styled.FlatList.attrs({
+  showsVerticalScrollIndicator: false,
+})`
+  padding: 0 20px;
+`;
+
+export const Starred = styled.View`
+  background: #ddd;
+  margin-top: 20px;
+  border-radius: 4px;
+  padding: 10px 15px;
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const OwnerAvatar = styled.Image`
+  width: 32px;
+  height: 32px;
+  border-radius: 16px;
+  background: #eee;
+`;
+
+export const Info = styled.View`
+  flex: 1;
+  margin-left: 10px;
+`;
+
+export const Title = styled.Text.attrs({
+  numberOfLines: 1,
+})`
+  color: #333;
+  font-weight: bold;
+  font-size: 14px;
+`;
+
+export const Author = styled.Text`
+  color: #666;
+  font-size: 12px;
 `;

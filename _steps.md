@@ -537,3 +537,9 @@ Utilizamos o método do ciclo de vida `componentDidMount` (com async) para fazer
 Criamos o arquivo `User/styles.js` com a estilização do cabeçalho da página `User` e importamos os componentes estilizados em `User/index.js`. Buscamos os dados do usuário armazenados no parâmetro e exibimos na renderização.
 
 ---
+
+## User | Exibindo dados da API: favoritos do Usuário
+
+Componente `User` modificado para exibir dados retornados pela API: os favoritos do Usuário. Definimos a estilização em `User/styles.js`, importamos os componentes estilizados em `User/index.js` e definimos a estrutura. Criamos a propriedade do estado `stars` que é utilizada para guardar os dados retornados pela API e exibi-los na renderização.
+
+---

@@ -508,9 +508,9 @@ Para fazer a validação, instalamos o módulo prop-types:
 yarn add prop-types
 ```
 
-No componente Repository importamos o prop-types, criamos a variável estática propTypes dentro da classe e realizamos as devidas validações na propriedade navigation do componente.
+No componente Main importamos o prop-types, criamos a variável estática propTypes dentro da classe e realizamos as devidas validações na propriedade navigation do componente.
 
-Apesar do objeto `navigation` possuir outras propriedades/métodos dentro dele, validamos apenas o método `navigation.navigate`, pois o único item que utililizamos. Não é necessário validar propriedades não utilizadas.
+Apesar do objeto `navigation` possuir outras propriedades/métodos dentro dele, validamos apenas o método `navigation.navigate`, pois o é único item que utililizamos. Não é necessário validar propriedades não utilizadas.
 
 ---
 
@@ -541,5 +541,18 @@ Criamos o arquivo `User/styles.js` com a estilização do cabeçalho da página 
 ## User | Exibindo dados da API: favoritos do Usuário
 
 Componente `User` modificado para exibir dados retornados pela API: os favoritos do Usuário. Definimos a estilização em `User/styles.js`, importamos os componentes estilizados em `User/index.js` e definimos a estrutura. Criamos a propriedade do estado `stars` que é utilizada para guardar os dados retornados pela API e exibi-los na renderização.
+
+---
+
+
+---
+
+## Validação das propriedades do componente User com o módulo prop-types
+
+É necessário validar todas as propriedades de um componente (mesmo aquelas preenchidas de maneira automática). No componente User, precisamos validar a proprieade `navigation` (que é preenchida automaticamente pelo React Navigation).
+
+No componente User importamos o prop-types, criamos a variável estática propTypes dentro da classe e realizamos as devidas validações na propriedade navigation do componente.
+
+Apesar do objeto `navigation` possuir outras propriedades/métodos dentro dele, validamos apenas o método `navigation.getParam`, pois o é único item que utililizamos no componente `User`. Não é necessário validar propriedades não utilizadas.
 
 ---

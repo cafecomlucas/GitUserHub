@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {View} from 'react-native';
+import PropTypes from 'prop-types';
 import api from '../../services/api';
 
 import {
@@ -18,6 +19,12 @@ import {
 } from './styles';
 
 export default class User extends Component {
+  static propTypes = {
+    navigation: PropTypes.shape({
+      getParam: PropTypes.func,
+    }).isRequired,
+  };
+
   static navigationOptions = ({navigation}) => ({
     title: navigation.getParam('user').name,
   });

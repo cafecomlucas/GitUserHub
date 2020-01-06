@@ -33,12 +33,14 @@ export default class User extends Component {
   state = {
     stars: [],
     loading: false,
+    per_page: 10,
     page: 1,
     endOfPages: false,
+    refresh: false,
   };
 
   async componentDidMount() {
-    const {loading, page} = this.state;
+    const {loading, page, per_page} = this.state;
     const {navigation} = this.props;
     const user = navigation.getParam('user');
 
@@ -47,7 +49,7 @@ export default class User extends Component {
     this.setState({loading: true});
     const {data} = await api.get(`/users/${user.login}/starred`, {
       params: {
-        per_page: 5,
+        per_page,
         page,
       },
     });
@@ -55,7 +57,7 @@ export default class User extends Component {
   }
 
   loadMore = async () => {
-    const {loading, stars, page, endOfPages} = this.state;
+    const {loading, stars, page, per_page, endOfPages} = this.state;
     const {navigation} = this.props;
     const user = navigation.getParam('user');
 
@@ -66,7 +68,7 @@ export default class User extends Component {
     this.setState({loading: true});
     const {data} = await api.get(`/users/${user.login}/starred`, {
       params: {
-        per_page: 5,
+        per_page,
         page: newPage,
       },
     });
@@ -81,10 +83,29 @@ export default class User extends Component {
     }
   };
 
+  refreshList = async () => {
+    const {loading, per_page} = this.state;
+    const {navigation} = this.props;
+    const user = navigation.getParam('user');
+
+    if (loading) return;
+
+    const page = 1;
+
+    this.setState({loading: true});
+    const {data} = await api.get(`/users/${user.login}/starred`, {
+      params: {
+        per_page,
+        page,
+      },
+    });
+    this.setState({stars: data, loading: false, page});
+  };
+
   render() {
     const {navigation} = this.props;
     const user = navigation.getParam('user');
-    const {stars, loading} = this.state;
+    const {stars, loading, refresh} = this.state;
 
     return (
       <Container>
@@ -105,6 +126,8 @@ export default class User extends Component {
         )}
         <Stars
           data={stars}
+          onRefresh={this.refreshList}
+          refreshing={refresh}
           loading={loading}
           keyExtractor={star => String(star.id)}
           onEndReachedThreshold={0.2}

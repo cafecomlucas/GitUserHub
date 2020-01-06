@@ -579,3 +579,15 @@ O método `loadMore` foi criado semelhante ao `componentDidMount`, com a diferen
 Os componentes estilizados foram atualizados para que a página não "quebre" ao carregar. O componente `Loading` foi removido e o componente estilizado `StarsTitleContainer` foi adicionado, servindo tanto para guardar o título, quanto para exibir o ícone de carregamento centralizado. Também foi adicionada uma opacidade ao componente estilizado `Stars` enquanto uma nova página está sendo requisitada.
 
 ---
+
+## User | Atualização da lista com reset
+
+Propriedade do estado `refresh` criada para guardar o status de recarregamento.
+
+No componente `Stars` foi adicionada a propriedade `refreshing` com a referência da variável `refresh` e a propriedade `onRefresh` com o método a ser executada ao arrastar a lista para baixo (`refreshList`).
+
+O método `refreshList` foi criado para buscar informações na API do GitHub passando como parâmetro a propriedade `page` com o valor 1. Quando a resposta é retornada, toda a lista é substituída no estado da aplicação (propriedade `stars`).
+
+
+
+---

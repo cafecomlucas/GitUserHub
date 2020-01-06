@@ -85,3 +85,7 @@ export const Author = styled.Text`
   color: #666;
   font-size: 12px;
 `;
+
+export const Loading = styled.View`
+  padding: 10px;
+`;

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View} from 'react-native';
+import {ActivityIndicator} from 'react-native';
 import PropTypes from 'prop-types';
 import api from '../../services/api';
 
@@ -16,6 +16,7 @@ import {
   Info,
   Title,
   Author,
+  Loading,
 } from './styles';
 
 export default class User extends Component {
@@ -31,20 +32,25 @@ export default class User extends Component {
 
   state = {
     stars: [],
+    loading: false,
   };
 
   async componentDidMount() {
+    const {loading} = this.state;
     const {navigation} = this.props;
     const user = navigation.getParam('user');
 
+    if (loading) return;
+
+    this.setState({loading: true});
     const {data} = await api.get(`/users/${user.login}/starred`);
-    this.setState({stars: data});
+    this.setState({stars: data, loading: false});
   }
 
   render() {
     const {navigation} = this.props;
     const user = navigation.getParam('user');
-    const {stars} = this.state;
+    const {stars, loading} = this.state;
 
     return (
       <Container>
@@ -53,6 +59,11 @@ export default class User extends Component {
           <Name>{user.name}</Name>
           <Bio>{user.bio}</Bio>
         </Header>
+        {loading && (
+          <Loading>
+            <ActivityIndicator size={30} color="#777" />
+          </Loading>
+        )}
         {!!stars.length && <StarsTitle>Stars</StarsTitle>}
         <Stars
           data={stars}

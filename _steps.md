@@ -556,3 +556,9 @@ No componente User importamos o prop-types, criamos a variável estática propTy
 Apesar do objeto `navigation` possuir outras propriedades/métodos dentro dele, validamos apenas o método `navigation.getParam`, pois o é único item que utililizamos no componente `User`. Não é necessário validar propriedades não utilizadas.
 
 ---
+
+## User | Exibindo ícone de carregamento até o retorno da API
+
+Criamos o Styled Component Loading para ser exibido enquanto os dados da API não chegam. No componente User importamos e verificamos se a propriedade loading do estado é true antes de exibir o componente estilizado Loading.
+
+---

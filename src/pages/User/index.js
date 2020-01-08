@@ -32,7 +32,7 @@ export default class User extends Component {
 
   state = {
     stars: [],
-    loading: false,
+    loading: true,
     per_page: 10,
     page: 1,
     endOfPages: false,
@@ -40,13 +40,10 @@ export default class User extends Component {
   };
 
   async componentDidMount() {
-    const {loading, page, per_page} = this.state;
+    const {page, per_page} = this.state;
     const {navigation} = this.props;
     const user = navigation.getParam('user');
 
-    if (loading) return;
-
-    this.setState({loading: true});
     const {data} = await api.get(`/users/${user.login}/starred`, {
       params: {
         per_page,

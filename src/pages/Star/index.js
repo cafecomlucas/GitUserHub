@@ -1,6 +1,7 @@
 import React from 'react';
 import {WebView} from 'react-native-webview';
 import {Dimensions} from 'react-native';
+import PropTypes from 'prop-types';
 
 export default function Star({navigation}) {
   return (
@@ -10,6 +11,12 @@ export default function Star({navigation}) {
     />
   );
 }
+
+Star.propTypes = {
+  navigation: PropTypes.shape({
+    getParam: PropTypes.func,
+  }).isRequired,
+};
 
 Star.navigationOptions = ({navigation}) => ({
   title: navigation.getParam('name'),

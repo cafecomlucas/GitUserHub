@@ -39,17 +39,17 @@ export default class User extends Component {
     refresh: false,
   };
 
-  async componentDidMount() {
+  componentDidMount() {
     this.load();
   }
 
-  loadMore = async () => {
+  loadMore = () => {
     const {page} = this.state;
     this.load(page + 1);
   };
 
   refreshList = () => {
-    this.load();
+    this.setState({endOfPages: false}, this.load);
   };
 
   handleNavigate = ({name, html_url}) => {

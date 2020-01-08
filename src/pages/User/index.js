@@ -32,7 +32,7 @@ export default class User extends Component {
 
   state = {
     stars: [],
-    loading: true,
+    loading: false,
     per_page: 10,
     page: 1,
     endOfPages: false,
@@ -40,27 +40,29 @@ export default class User extends Component {
   };
 
   async componentDidMount() {
-    const {page, per_page} = this.state;
-    const {navigation} = this.props;
-    const user = navigation.getParam('user');
-
-    const {data} = await api.get(`/users/${user.login}/starred`, {
-      params: {
-        per_page,
-        page,
-      },
-    });
-    this.setState({stars: data, loading: false});
+    this.load();
   }
 
   loadMore = async () => {
-    const {loading, stars, page, per_page, endOfPages} = this.state;
+    const {page} = this.state;
+    this.load(page + 1);
+  };
+
+  refreshList = () => {
+    this.load();
+  };
+
+  handleNavigate = ({name, html_url}) => {
+    const {navigation} = this.props;
+    navigation.navigate('Star', {name, html_url});
+  };
+
+  load = async (newPage = 1) => {
+    const {loading, stars, per_page, endOfPages} = this.state;
     const {navigation} = this.props;
     const user = navigation.getParam('user');
 
     if (loading || endOfPages) return;
-
-    const newPage = page + 1;
 
     this.setState({loading: true});
     const {data} = await api.get(`/users/${user.login}/starred`, {
@@ -74,34 +76,10 @@ export default class User extends Component {
       this.setState({endOfPages: true});
     } else {
       this.setState({
-        stars: [...stars, ...data],
+        stars: newPage >= 2 ? [...stars, ...data] : data,
         page: newPage,
       });
     }
-  };
-
-  refreshList = async () => {
-    const {loading, per_page} = this.state;
-    const {navigation} = this.props;
-    const user = navigation.getParam('user');
-
-    if (loading) return;
-
-    const page = 1;
-
-    this.setState({loading: true});
-    const {data} = await api.get(`/users/${user.login}/starred`, {
-      params: {
-        per_page,
-        page,
-      },
-    });
-    this.setState({stars: data, loading: false, page});
-  };
-
-  handleNavigate = ({name, html_url}) => {
-    const {navigation} = this.props;
-    navigation.navigate('Star', {name, html_url});
   };
 
   render() {

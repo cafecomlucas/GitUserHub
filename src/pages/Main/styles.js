@@ -21,7 +21,8 @@ export const Input = styled.TextInput.attrs({
   background: #eee;
   border-radius: 4px;
   padding: 0 15px;
-  border: 1px solid #c7c7c7;
+  border-width: 1px;
+  border-color: ${props => (props.error ? '#F00' : '#c7c7c7')};
   opacity: ${props => (props.loading ? 0.8 : 1)};
 `;
 

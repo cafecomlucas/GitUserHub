@@ -35,6 +35,8 @@ export default class Main extends Component {
     newUser: '',
     users: [],
     loading: false,
+    error: false,
+    errorTimeout: null,
   };
 
   async componentDidMount() {
@@ -59,31 +61,60 @@ export default class Main extends Component {
   };
 
   handleSubmit = async () => {
-    const {users: oldUsers, newUser, loading} = this.state;
+    const {users: oldUsers, newUser, loading, errorTimeout} = this.state;
+
+    console.tron.log(oldUsers);
 
     if (loading) return;
 
-    this.setState({loading: true});
+    try {
+      if (newUser === '') {
+        throw 'Campo de usuário vazio';
+      }
+      if (
+        oldUsers.find(
+          user => user.login.toLowerCase() === newUser.toLowerCase()
+        )
+      ) {
+        throw 'Usuário já existente';
+        return;
+      }
 
-    const {data} = await api.get(`/users/${newUser}`);
+      this.setState({loading: true});
 
-    const user = {
-      name: data.name,
-      login: data.login,
-      bio: data.bio,
-      avatar: data.avatar_url,
-    };
+      const {data} = await api.get(`/users/${newUser}`);
 
-    const users = [user, ...oldUsers];
-    console.tron.log(users);
+      const user = {
+        name: data.name,
+        login: data.login,
+        bio: data.bio,
+        avatar: data.avatar_url,
+      };
 
-    Keyboard.dismiss();
+      const users = [user, ...oldUsers];
 
-    this.setState({
-      users,
-      newUser: '',
-      loading: false,
-    });
+      Keyboard.dismiss();
+
+      this.setState({
+        users,
+        newUser: '',
+      });
+    } catch (err) {
+      console.tron.warn(err);
+      this.setState({error: true});
+      clearTimeout(errorTimeout);
+      this.setState({
+        errorTimeout: setTimeout(
+          () =>
+            this.setState({
+              error: false,
+            }),
+          2000
+        ),
+      });
+    } finally {
+      this.setState({loading: false});
+    }
   };
 
   handleNavigate = user => {
@@ -92,12 +123,13 @@ export default class Main extends Component {
   };
 
   render() {
-    const {newUser, users, loading} = this.state;
+    const {newUser, users, loading, error} = this.state;
 
     return (
       <Container>
         <Form>
           <Input
+            error={error}
             autocorrect={false}
             autoCapitalize="none"
             placeholder="Adicionar usuário"

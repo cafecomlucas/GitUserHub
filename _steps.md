@@ -609,3 +609,20 @@ Em `User/styles.js`, alteramos o componente estilizado `Starred` para exportar u
 Em `User/index.js`, alteramos o componente `Starred` para executar o método `handleNavigate` passando o usuário atual no parâmetro. O método `handleNavigate` foi criado/definido para chamar a rota `Star`, passando a propriedade `name` (nome do repositório favorito) e a `html_url` (endereço web) via parâmetros.
 
 ---
+
+## Main | Alterando estilização em caso de erro
+
+Um `try/catch` adicionado ao método `handleSubmit` do componente `Main` para capturar possíveis erros.
+
+A propriedade `error` foi criada no estado e é setada para `true` toda vez que um erro é disparado.
+
+Styled Component `Input` alterado para modificar a estilização do campo onde o repositório é digitado com base na propriedade `error`. Quando um erro é disparado o campo de texto fica com a borda vermelha por 2 segundos.
+
+É verificado se o campo foi preenchido antes de fazer buscar na API. Se o campo estiver vazio, disparamos um erro (caindo no catch criado anteriormente).
+
+Método `find` utilizado para verificar se um usuário já existe no estado atual antes de fazer buscar na API. Caso o repositório já exista, disparamos um erro (caindo no catch criado anteriormente).
+
+(para exibir apenas um texto no console, o `throw` não precisa do `new Error` no ambiente mobile)
+
+
+---
